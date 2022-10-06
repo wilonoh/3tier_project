@@ -14,13 +14,20 @@ resource "aws_db_instance" "three_tier_sql" {
   #parameter_group_name = "default.mysql5.7"
   skip_final_snapshot   = var.mysql_skip_final_snapshot
 #   vpc_id                   = aws_vpc.three_tier_vpc.id
-  #db_subnet_group_name  = aws_subnet.app_private_sub1.id
+  db_subnet_group_name  = aws_db_subnet_group.rds_mysql_subnet_group.id
   tags = {
     name = var.three_tier_sql_name
   }
 }
 
+resource "aws_db_subnet_group" "rds_mysql_subnet_group" {
+  name       = var.rds_mysql_subnet_group_name
+  subnet_ids = [aws_subnet.app_private_sub1.id, aws_subnet.app_private_sub2.id]
 
+  tags = {
+    Name = var.rds_mysql_subnet_group_name
+  }
+}
 
 # # missing parameters
 # vpc_id

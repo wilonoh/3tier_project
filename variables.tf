@@ -294,3 +294,9 @@ variable "load_balancer_type" {
     default = "three_tier_sql"
     type    = string
 }
+
+variable "rds_mysql_subnet_group_name" {
+    description = "making rds_mysql_subnet_group_name a variable"
+    default = "rds_mysql_subnet_group"
+    type    = string
+}
